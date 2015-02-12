@@ -42,7 +42,7 @@ number_of_arrangements("AABCD") ==  60 # 5*4*3
 number_of_arrangements("AABBC") ==  30 # 5  *3*2
 ```
 
-After about 15 of these I understood the pattern. You group and count the non-unique digits.  Then you divide the main factorial by the facorials of those counts.
+After about 15 of these I understood the pattern. You group and count the non-unique digits.  Then you divide the main factorial by the factorials of those counts.
 
 so for
 
@@ -50,10 +50,10 @@ so for
 number_of_arrangements("AABBC") ==  30
 # instead of 5*3*2 it's better represented as
 # FAC(5) / (FAC(2) * FAC(2) * FAC(1))
-# 5*4*3*2*1 / 2*1*2*1*1
+# 5*4*3*2*1 / 2*1*2*1*1 == 5*4*3*2/2*2
 ```
 
-After I refactored this helper function I added the following test to see if I solved the O^2 problem:
+After I rewrote this helper function I added the following test to see if I solved the O^2 problem:
 
 ```python
 # refactored helper function
