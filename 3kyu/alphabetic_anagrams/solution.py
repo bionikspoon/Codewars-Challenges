@@ -10,8 +10,6 @@ def number_of_arrangements(word):
     return factorial(len(word)) / reduce(mul, letter_counts)
 
 
-
-
 def listPosition(word):
     """Return the anagram list position of the word"""
     position_score = [number_of_arrangements(word[k:]) for k, _ in
@@ -54,4 +52,3 @@ testValues = {'A': 1, 'ABAB': 2, 'AAAB': 1, 'BAAA': 4, 'QUESTION': 24572,
 for word in testValues:
     test.assert_equals(listPosition(word), testValues[word],
                        'Incorrect list position for: ' + word)
-
