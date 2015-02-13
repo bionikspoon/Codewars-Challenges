@@ -1,11 +1,11 @@
+from textwrap import wrap, fill
 from tabulate import tabulate
-from termcolor import colored, cprint
+from termcolor import colored
 
 
 class TestHandler(object):
     asserts_list = [("", "Act", "Exp", "Msg")]
     expect_errors_list = [("", "Msg")]
-    first_error = None
     count = 0
 
     def assert_equals(self, actual, expected,
@@ -15,9 +15,6 @@ class TestHandler(object):
         try:
             assert actual == expected, message
         except AssertionError, e:
-            if TestHandler.first_error is None:
-                TestHandler.first_error = e.message
-
             status_code = colored(" X", "red")
             message = e
         else:
@@ -50,6 +47,7 @@ class TestHandler(object):
                        message=None):
         self.asserts_list.append((summary, actual, expected, message))
 
+
     def handle_expect_errors(self, summary=None, message=None):
         self.expect_errors_list.append((summary, message))
 
@@ -59,9 +57,7 @@ class TestHandler(object):
         self.handle_expect_errors(message=message)
 
     def dispatch_asserts(self):
-        if TestHandler.first_error is not None:
-            print colored(TestHandler.first_error, 'red', attrs=['bold'])
         if len(self.asserts_list) > (1 + TestHandler.count):
-            print "\n", tabulate(self.asserts_list, headers="firstrow")
+            print tabulate(self.asserts_list, headers="firstrow")
         if len(self.expect_errors_list) > (1 + TestHandler.count):
-            print "\n", tabulate(self.expect_errors_list, headers="firstrow")
+            print tabulate(self.expect_errors_list, headers="firstrow")
